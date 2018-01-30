@@ -29,7 +29,7 @@ NSString *const AudioRecorderEventFinished = @"recordingFinished";
   NSNumber *_audioEncoding;
   NSNumber *_audioChannels;
   NSNumber *_audioSampleRate;
-  AVAudioSession *_recordSession;
+  // AVAudioSession *_recordSession;
   BOOL _meteringEnabled;
   BOOL _measurementMode;
 }
@@ -168,14 +168,14 @@ RCT_EXPORT_METHOD(prepareRecordingAtPath:(NSString *)path sampleRate:(float)samp
 
   NSError *error = nil;
 
-  _recordSession = [AVAudioSession sharedInstance];
+  // _recordSession = [AVAudioSession sharedInstance];
 
-  if (_measurementMode) {
-      [_recordSession setCategory:AVAudioSessionCategoryRecord error:nil];
-      [_recordSession setMode:AVAudioSessionModeMeasurement error:nil];
-  }else{
-      [_recordSession setCategory:AVAudioSessionCategoryMultiRoute error:nil];
-  }
+  // if (_measurementMode) {
+  //     [_recordSession setCategory:AVAudioSessionCategoryRecord error:nil];
+  //     [_recordSession setMode:AVAudioSessionModeMeasurement error:nil];
+  // }else{
+  //     [_recordSession setCategory:AVAudioSessionCategoryMultiRoute error:nil];
+  // }
 
   _audioRecorder = [[AVAudioRecorder alloc]
                 initWithURL:_audioFileURL
@@ -197,7 +197,7 @@ RCT_EXPORT_METHOD(startRecording)
 {
   if (!_audioRecorder.recording) {
     [self startProgressTimer];
-    [_recordSession setActive:YES error:nil];
+    // [_recordSession setActive:YES error:nil];
     [_audioRecorder record];
 
   }
@@ -206,7 +206,7 @@ RCT_EXPORT_METHOD(startRecording)
 RCT_EXPORT_METHOD(stopRecording)
 {
   [_audioRecorder stop];
-  [_recordSession setCategory:AVAudioSessionCategoryPlayback error:nil];
+  // [_recordSession setCategory:AVAudioSessionCategoryPlayback error:nil];
   _prevProgressUpdateTime = nil;
 }
 
