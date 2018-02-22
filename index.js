@@ -73,6 +73,9 @@ var AudioRecorder = {
     if (this.progressSubscription) this.progressSubscription.remove();
     if (this.finishedSubscription) this.finishedSubscription.remove();
   },
+  updateOnFinishedListener: function(onFinished) {
+    this.onFinished = onFinished
+  }
 };
 
 let AudioUtils = {};
